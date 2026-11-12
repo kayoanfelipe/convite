@@ -210,7 +210,7 @@ body.opened #page{opacity:1}
   <button class="go" id="go" type="button">Ver como funciona</button>
   <div class="error">
     <h2>Este convite não está disponível</h2>
-    <p>O link pode ter expirado ou estar incompleto. Os convites do The Group são pessoais. Se você recebeu este link do Kayoan, fale com ele pelo WhatsApp.</p>
+    <p>O link pode estar incompleto. Os convites do The Group são pessoais. Se você recebeu este link do Kayoan, fale com ele pelo WhatsApp.</p>
   </div>
 </div>
 <div id="page">
@@ -266,7 +266,7 @@ body.opened #page{opacity:1}
       if (d && d.status === 'expirado' && d.nome) {
         const curto = String(d.nome).split(/\s+/)[0];
         document.querySelector('.gate .error h2').textContent = 'Oi, ' + curto + ', seu convite venceu';
-        document.querySelector('.gate .error p').textContent = 'Os convites do The Group valem por 14 dias. Fale com o Kayoan pelo WhatsApp que ele te manda um novo.';
+        document.querySelector('.gate .error p').textContent = 'Fale com o Kayoan pelo WhatsApp que ele te manda um novo.';
         return invalid();
       }
       if (!d || d.status !== 'ok' || !d.nome || !d.html) return invalid();

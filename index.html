@@ -50,6 +50,10 @@ section{padding:72px 0;border-top:1px solid var(--line)}
 .dark .incl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0 0;padding:0;list-style:none}
 .dark .incl li{font-size:13px;border:1px solid #333;border-radius:999px;padding:7px 14px;color:var(--on-dark)}
 .dark .incl li.off{color:#777;text-decoration:line-through}
+.card.off{background:var(--soft);border-color:transparent}
+.card.off h3,.card.off p{color:#a3a3a3;text-decoration:line-through;text-decoration-color:#bdbdbd}
+.card.off .n{color:#a3a3a3}
+.card .so{display:inline-block;margin-top:14px;font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:#fff}
 
 .steps{list-style:none;margin:36px auto 0;padding:0;max-width:720px;border-top:1px solid var(--line);counter-reset:s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:8px;padding:20px 0;border-bottom:1px solid var(--line)}
@@ -183,19 +187,19 @@ body.opened #page{opacity:1}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tg" viewBox="0 0 59 43"><path d="M30.6908 12.918L35.3902 20.8021C35.6352 21.2154 35.6352 21.7224 35.3902 22.1378L30.6908 30.0177C30.1604 30.9081 28.8354 30.9081 28.3071 30.0177L23.6119 22.1378C23.3627 21.7224 23.3627 21.2154 23.6119 20.8021L28.3071 12.918C28.8375 12.0275 30.1625 12.0275 30.6908 12.918ZM44.1499 30.6866L37.3522 33.6967C37.2776 33.9459 37.1988 34.1973 37.103 34.438C36.6726 35.533 36.0868 36.4958 35.3348 37.3139C34.5871 38.1362 33.7115 38.7816 32.7124 39.2545C31.7133 39.7232 30.6397 39.9554 29.5 39.9554C28.3603 39.9554 27.2867 39.7211 26.2876 39.2545C25.2885 38.7837 24.4129 38.1362 23.6609 37.3139C22.9132 36.4958 22.3231 35.533 21.8971 34.438C21.7991 34.1973 21.7202 33.948 21.6457 33.6967L14.8501 30.6866C14.9375 32.2843 15.3124 33.1833 15.977 34.6084C16.7461 36.2615 17.7984 37.708 19.1362 38.9456C20.474 40.1833 22.027 41.159 23.7951 41.8705C25.5633 42.5799 27.4635 42.9356 29.5 42.9356C31.5365 42.9356 33.4431 42.5778 35.2283 41.8705C37.0135 41.159 38.5664 40.1833 39.8872 38.9456C41.208 37.708 42.2518 36.2615 43.0187 34.6084C43.6833 33.1812 44.0583 32.2843 44.1499 30.6866ZM14.8437 12.2512L21.7565 9.17936C21.8033 9.04302 22.9132 6.71252 23.6609 5.89023C24.4129 5.06795 25.2885 4.42459 26.2876 3.9538C27.2867 3.48514 28.356 3.2508 29.5 3.2508C30.644 3.2508 31.7133 3.48514 32.7124 3.9538C33.7115 4.42459 34.5871 5.06795 35.3348 5.89023C36.0868 6.71252 36.6726 7.67114 37.103 8.7661C37.1562 8.90244 37.1945 9.04302 37.2414 9.17936L44.1541 12.2512C44.0711 10.6322 43.6919 9.72899 43.0208 8.29958C42.2518 6.66566 41.2101 5.22773 39.8893 3.99005C38.5686 2.7481 37.0156 1.77452 35.2304 1.06514C33.4453 0.353625 31.5387 0 29.5021 0C27.4656 0 25.5654 0.353625 23.7973 1.06514C22.0291 1.77452 20.4762 2.7481 19.1384 3.99005C17.8005 5.22773 16.7461 6.66353 15.9792 8.29958C15.3081 9.72899 14.9289 10.6322 14.8459 12.2512H14.8437ZM12.183 30.5204C10.6599 30.0091 9.32845 29.3083 8.18875 28.4179C7.0448 27.5253 6.15008 26.4836 5.49609 25.2928C4.84209 24.1041 4.51617 22.8301 4.51617 21.4689C4.51617 20.1076 4.84209 18.8359 5.49609 17.6451C6.15008 16.4564 7.0448 15.4126 8.18875 14.5221C9.32845 13.6295 10.6599 12.9265 12.183 12.4174C12.3705 12.3556 12.5643 12.3108 12.7561 12.2555L17.1125 4.03051C14.865 4.13063 13.5208 4.57587 11.5354 5.37259C9.26243 6.28861 7.2621 7.53269 5.54297 9.1027C3.82171 10.6748 2.46471 12.5239 1.4784 14.6499C0.49208 16.7759 0 19.0489 0 21.471C0 23.8931 0.49208 26.1576 1.4784 28.2624C2.46471 30.3649 3.82384 32.214 5.54297 33.8053C7.26423 35.4009 9.26243 36.6556 11.5354 37.5674C13.5208 38.3662 14.8672 38.8115 17.1125 38.9137L12.7561 30.6887C12.5643 30.6333 12.3705 30.5843 12.183 30.5225V30.5204ZM46.817 30.5204C48.3401 30.0091 49.6716 29.3083 50.8112 28.4179C51.9552 27.5253 52.8499 26.4836 53.5039 25.2928C54.1579 24.1041 54.4838 22.8301 54.4838 21.4689C54.4838 20.1076 54.1579 18.8359 53.5039 17.6451C52.8499 16.4564 51.9552 15.4126 50.8112 14.5221C49.6716 13.6295 48.3401 12.9265 46.817 12.4174C46.6295 12.3556 46.4357 12.3108 46.2439 12.2555L41.8875 4.03051C44.135 4.13063 45.4792 4.57587 47.4646 5.37259C49.7376 6.28861 51.7379 7.53269 53.457 9.1027C55.1783 10.6748 56.5353 12.5239 57.5216 14.6499C58.5079 16.7759 59 19.0489 59 21.471C59 23.8931 58.5079 26.1576 57.5216 28.2624C56.5353 30.3649 55.1762 32.214 53.457 33.8053C51.7358 35.4009 49.7376 36.6556 47.4646 37.5674C45.4792 38.3662 44.1328 38.8115 41.8875 38.9137L46.2439 30.6887C46.4357 30.6333 46.6295 30.5843 46.817 30.5225V30.5204Z"/></symbol></svg>
 
 
-<div class="gate loading" id="gate" role="dialog" aria-label="Convite do The Group">
+<div class="gate loading" id="gate" role="dialog" aria-label="Convite para o The Group">
   <p class="headline">ACESSO EXCLUSIVO</p>
   <div class="scene">
     <div class="env">
       <div class="back paper"></div>
       <div class="letter">
-        <p><span data-nome-curto>Você</span> foi selecionado para o <b>The Group.</b></p>
+        <p><b data-membro-curto>Um membro</b> convidou você para passar <b>três meses no The Group.</b></p>
         <p>Um grupo restrito às mentes por trás das operações <b>mais lucrativas do país.</b></p>
         <p><b>+R$ 6 bilhões em receita gerada.</b></p>
-        <p>A partir de agora, você vai entender como funciona e como <b>garantir seu acesso.</b></p>
+        <p>A seguir, o que o convite inclui e como <b>aplicar.</b></p>
       </div>
       <div class="front paper"></div>
-      <div class="name"><span data-nome>…</span></div>
+      <div class="name"><small>Convite de</small><span data-membro>…</span></div>
       <div class="flap-shadow"></div>
       <div class="flap">
         <div class="face out paper"><span class="motto">tudo é sobre conexão.</span></div>
@@ -210,7 +214,7 @@ body.opened #page{opacity:1}
   <button class="go" id="go" type="button">Ver como funciona</button>
   <div class="error">
     <h2>Este convite não está disponível</h2>
-    <p>O link pode estar incompleto. Os convites do The Group são pessoais. Se você recebeu este link do Kayoan, fale com ele pelo WhatsApp.</p>
+    <p>O link pode estar incompleto. Se você recebeu este convite de um membro do The Group, fale com ele.</p>
   </div>
 </div>
 <div id="page">
@@ -227,51 +231,54 @@ body.opened #page{opacity:1}
 (() => {
   const SUPABASE_URL = 'https://kqucpivagntlmukfghhg.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_yFxha4btvFg2bftRPaPhTA_kZgUNhAV';
-  const CAL = 'https://cal.com/kayoan-felipe-guadagnini-owjodt/30min?overlayCalendar=true';
+  const APLICAR = 'https://aplicar.ogrupo.com.br/';
   const gate = document.getElementById('gate');
   const seal = document.getElementById('seal');
   const q = new URLSearchParams(location.search);
-  const token = (q.get('c') || '').replace(/\s+/g, '').toLowerCase();
+  // link antigo de acesso (convite.ogrupo.com.br/?c=TOKEN) vai para /acesso
+  if (q.get('c')) { location.replace('/acesso/' + location.search); return; }
+  const token = (q.get('t') || '').replace(/\s+/g, '').toLowerCase();
   const local = ['localhost','127.0.0.1'].includes(location.hostname);
   const demo = local ? q.get('demo') : null;
 
-  function fill(nome, email) {
-    const curto = nome.split(/\s+/)[0];
-    document.querySelectorAll('[data-nome]').forEach(e => e.textContent = nome);
-    document.querySelectorAll('[data-nome-curto]').forEach(e => e.textContent = curto + ', você');
-    const u = new URL(CAL);
-    u.searchParams.set('name', nome);
-    if (email) u.searchParams.set('email', email);
-    const cal = document.getElementById('cal');
-    if (cal) cal.href = u.toString();
-    document.title = 'Convite para ' + curto + ' · The Group';
+  function fill(membro) {
+    const curto = membro.split(/\s+/)[0];
+    document.querySelectorAll('[data-membro]').forEach(e => e.textContent = membro);
+    document.querySelectorAll('[data-membro-curto]').forEach(e => e.textContent = curto);
+    const u = new URL(APLICAR);
+    if (token) u.searchParams.set('convite', token);
+    const ap = document.getElementById('aplicar');
+    if (ap) ap.href = u.toString();
+    document.title = 'Convite de ' + curto + ' · The Group';
     gate.classList.remove('loading');
   }
-  function invalid() { gate.classList.remove('loading'); gate.classList.add('invalid'); }
+  function invalid(h, p) {
+    if (h) document.querySelector('.gate .error h2').textContent = h;
+    if (p) document.querySelector('.gate .error p').textContent = p;
+    gate.classList.remove('loading'); gate.classList.add('invalid');
+  }
+  const USADO = ['Este convite já foi usado', 'Cada convite vale para uma pessoa. Se foi você quem aplicou, o Kayoan fala com você pelo WhatsApp quando a aplicação for avaliada.'];
 
   async function load() {
     if (demo) {
-      try { const t = await fetch('conteudo.html'); if (t.ok) document.getElementById('conteudo').innerHTML = await t.text(); } catch (e) {}
-      return fill(demo, '');
+      if (q.get('estado') === 'usado') return invalid(...USADO);
+      try { const t = await fetch('conteudo-membro.html'); if (t.ok) document.getElementById('conteudo').innerHTML = await t.text(); } catch (e) {}
+      return fill(demo);
     }
     if (!/^[a-z0-9]{12}$/.test(token)) return invalid();
     try {
-      const r = await fetch(SUPABASE_URL + '/rest/v1/rpc/abrir_convite', {
+      // função a criar no banco: devolve { status: ok | usado | invalido, membro, html }
+      const r = await fetch(SUPABASE_URL + '/rest/v1/rpc/abrir_convite_membro', {
         method: 'POST',
         headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({ p_token: token })
       });
       if (!r.ok) return invalid();
       const d = await r.json();
-      if (d && d.status === 'expirado' && d.nome) {
-        const curto = String(d.nome).split(/\s+/)[0];
-        document.querySelector('.gate .error h2').textContent = 'Oi, ' + curto + ', seu convite venceu';
-        document.querySelector('.gate .error p').textContent = 'Fale com o Kayoan pelo WhatsApp que ele te manda um novo.';
-        return invalid();
-      }
-      if (!d || d.status !== 'ok' || !d.nome || !d.html) return invalid();
+      if (d && d.status === 'usado') return invalid(...USADO);
+      if (!d || d.status !== 'ok' || !d.membro || !d.html) return invalid();
       document.getElementById('conteudo').innerHTML = d.html;
-      fill(d.nome, d.email || '');
+      fill(d.membro);
     } catch (e) { invalid(); }
   }
 

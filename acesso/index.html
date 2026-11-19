@@ -75,6 +75,11 @@ section{padding:72px 0;border-top:1px solid var(--line)}
 .price .rows span{font-size:13.5px;color:var(--ink-2);line-height:1.55}
 .btns{display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:32px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:16px 28px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:500;font-size:15px}
+.btn{border:0;cursor:pointer;font-family:inherit}
+.aceito{max-width:520px;margin:32px auto 0;text-align:center;border:1px solid var(--line);border-radius:24px;padding:28px 24px}
+.aceito .ok{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;font-size:20px;margin-bottom:14px}
+.aceito h3{font-size:20px;font-weight:600;margin:0 0 6px}
+.aceito p{font-size:14.5px;color:var(--ink-2);line-height:1.6;margin:0}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .fine{font-size:12.5px;color:var(--muted);text-align:center;max-width:560px;margin:18px auto 0;line-height:1.6}
 
@@ -227,7 +232,6 @@ body.opened #page{opacity:1}
 (() => {
   const SUPABASE_URL = 'https://kqucpivagntlmukfghhg.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_yFxha4btvFg2bftRPaPhTA_kZgUNhAV';
-  const ZAP = '5543996459340';
   const gate = document.getElementById('gate');
   const seal = document.getElementById('seal');
   const q = new URLSearchParams(location.search);
@@ -239,8 +243,6 @@ body.opened #page{opacity:1}
     const curto = nome.split(/\s+/)[0];
     document.querySelectorAll('[data-nome]').forEach(e => e.textContent = nome);
     document.querySelectorAll('[data-nome-curto]').forEach(e => e.textContent = curto + ', você');
-    const zap = document.getElementById('zap');
-    if (zap) zap.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent('Oi, Kayoan. Aqui é ' + nome + '. Vi o convite e quero seguir.');
     document.title = 'Acesso para ' + curto + ' · The Group';
     gate.classList.remove('loading');
   }
@@ -269,8 +271,36 @@ body.opened #page{opacity:1}
       if (!d || d.status !== 'ok' || !d.nome || !d.html) return invalid();
       document.getElementById('conteudo').innerHTML = d.html;
       fill(d.nome, d.email || '');
+      if (d.aceito_em) aceito(d.aceito_em);
     } catch (e) { invalid(); }
   }
+
+  function aceito(quando) {
+    const box = document.getElementById('aceite');
+    if (!box) return;
+    const d = quando ? new Date(quando) : new Date();
+    const dia = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+    const hora = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    box.outerHTML = '<div class="aceito" id="aceite"><span class="ok" aria-hidden="true">✓</span><h3>Convite aceito</h3>'
+      + '<p>Em ' + dia + ' às ' + hora + '. O Kayoan vai falar com você sobre os próximos passos.</p></div>';
+  }
+  document.addEventListener('click', async ev => {
+    const b = ev.target.closest && ev.target.closest('#aceitar');
+    if (!b || b.disabled) return;
+    b.disabled = true; b.textContent = 'Aceitando…';
+    if (demo) return aceito();
+    try {
+      const r = await fetch(SUPABASE_URL + '/rest/v1/rpc/aceitar_convite', {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_token: token })
+      });
+      const d = r.ok ? await r.json() : null;
+      if (d && d.status === 'ok') return aceito(d.aceito_em);
+    } catch (e) {}
+    b.disabled = false; b.textContent = 'Aceitar convite';
+    alert('Não foi possível aceitar agora. Tente de novo em instantes.');
+  });
 
   let opened = false;
   const $e = s => gate.querySelector(s);

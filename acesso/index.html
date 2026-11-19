@@ -227,7 +227,7 @@ body.opened #page{opacity:1}
 (() => {
   const SUPABASE_URL = 'https://kqucpivagntlmukfghhg.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_yFxha4btvFg2bftRPaPhTA_kZgUNhAV';
-  const CAL = 'https://cal.com/kayoan-felipe-guadagnini-owjodt/30min?overlayCalendar=true';
+  const ZAP = '5543996459340';
   const gate = document.getElementById('gate');
   const seal = document.getElementById('seal');
   const q = new URLSearchParams(location.search);
@@ -239,11 +239,8 @@ body.opened #page{opacity:1}
     const curto = nome.split(/\s+/)[0];
     document.querySelectorAll('[data-nome]').forEach(e => e.textContent = nome);
     document.querySelectorAll('[data-nome-curto]').forEach(e => e.textContent = curto + ', você');
-    const u = new URL(CAL);
-    u.searchParams.set('name', nome);
-    if (email) u.searchParams.set('email', email);
-    const cal = document.getElementById('cal');
-    if (cal) cal.href = u.toString();
+    const zap = document.getElementById('zap');
+    if (zap) zap.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent('Oi, Kayoan. Aqui é ' + nome + '. Vi o convite e quero seguir.');
     document.title = 'Acesso para ' + curto + ' · The Group';
     gate.classList.remove('loading');
   }

@@ -238,8 +238,17 @@ body.opened #page{opacity:1}
   const token = (q.get('c') || '').replace(/\s+/g, '').toLowerCase();
   const local = ['localhost','127.0.0.1'].includes(location.hostname);
   const demo = local ? q.get('demo') : null;
+  const CAL = 'https://cal.com/kayoan-felipe-guadagnini-owjodt/30min?overlayCalendar=true';
+  let quem = { nome: '', email: '' };
+  function calUrl() {
+    const u = new URL(CAL);
+    if (quem.nome) u.searchParams.set('name', quem.nome);
+    if (quem.email) u.searchParams.set('email', quem.email);
+    return u.toString();
+  }
 
   function fill(nome, email) {
+    quem = { nome: nome, email: email || '' };
     const curto = nome.split(/\s+/)[0];
     document.querySelectorAll('[data-nome]').forEach(e => e.textContent = nome);
     document.querySelectorAll('[data-nome-curto]').forEach(e => e.textContent = curto + ', você');
@@ -282,13 +291,14 @@ body.opened #page{opacity:1}
     const dia = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     const hora = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     box.outerHTML = '<div class="aceito" id="aceite"><span class="ok" aria-hidden="true">✓</span><h3>Convite aceito</h3>'
-      + '<p>Em ' + dia + ' às ' + hora + '. O Kayoan vai falar com você sobre os próximos passos.</p></div>';
+      + '<p>Em ' + dia + ' às ' + hora + '. Agora escolha o dia e o horário da sua conversa com o Kayoan.</p>'
+      + '<a class="btn" href="' + calUrl() + '" style="margin-top:18px">Escolher dia e horário</a></div>';
   }
   document.addEventListener('click', async ev => {
     const b = ev.target.closest && ev.target.closest('#aceitar');
     if (!b || b.disabled) return;
     b.disabled = true; b.textContent = 'Aceitando…';
-    if (demo) return aceito();
+    if (demo) { aceito(); return setTimeout(() => { location.href = calUrl(); }, 900); }
     try {
       const r = await fetch(SUPABASE_URL + '/rest/v1/rpc/aceitar_convite', {
         method: 'POST',
@@ -296,7 +306,7 @@ body.opened #page{opacity:1}
         body: JSON.stringify({ p_token: token })
       });
       const d = r.ok ? await r.json() : null;
-      if (d && d.status === 'ok') return aceito(d.aceito_em);
+      if (d && d.status === 'ok') { aceito(d.aceito_em); return setTimeout(() => { location.href = calUrl(); }, 900); }
     } catch (e) {}
     b.disabled = false; b.textContent = 'Aceitar convite';
     alert('Não foi possível aceitar agora. Tente de novo em instantes.');
